@@ -4,8 +4,6 @@ c:\users\patrick\documents\github\hophacks_fa17\myo-sdk-win-0.9.0\myo-sdk-win-0.
 c:\users\patrick\documents\github\hophacks_fa17\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include\myo\cxx\impl\../detail/ThrowOnError.hpp(45): warning C4297: 'myo::ThrowOnError::~ThrowOnError': function assumed not to throw an exception but does
   c:\users\patrick\documents\github\hophacks_fa17\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include\myo\cxx\impl\../detail/ThrowOnError.hpp(45): note: destructor or deallocator has a (possibly implicit) non-throwing exception specification
 emg-data-sample.cpp(64): warning C4102: 'std': unreferenced label
-emg-data-sample.cpp(183): warning C4267: '=': conversion from 'size_t' to 'int8_t', possible loss of data
-emg-data-sample.cpp(184): warning C4244: '=': conversion from 'double' to 'int8_t', possible loss of data
 c:\users\patrick\documents\github\hophacks_fa17\emg-data-sample.cpp(76): warning C4700: uninitialized local variable 'iter' used
   emg-data-sample-VisualStudio2013.vcxproj -> C:\Users\Patrick\Documents\GitHub\hophacks_FA17\x64\Debug\emg-data-sample-VisualStudio2013.exe
   emg-data-sample-VisualStudio2013.vcxproj -> C:\Users\Patrick\Documents\GitHub\hophacks_FA17\x64\Debug\emg-data-sample-VisualStudio2013.pdb (Partial PDB)

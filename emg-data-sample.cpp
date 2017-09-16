@@ -113,7 +113,6 @@ int main(int argc, char** argv)
 {
 	// We catch any exceptions that might occur below -- see the catch statement for more details.
 	try {
-		int iter = 0;
 
 		// First, we create a Hub with our application identifier. Be sure not to use the com.example namespace when
 		// publishing your application. The Hub provides access to one or more Myos.
@@ -167,12 +166,12 @@ int main(int argc, char** argv)
 
 				emg_data_test.open("emg_data_test.csv", std::ios_base::app);
 				cycles = 0;
-				std::array<int8_t, 8> results;
+				std::array<double, 8> results;
 
 				//perform sum
 				for (int i = 0; i < samples.size(); i++) {
 					for (int j = 0; j < samples[i].size(); j++) {
-						int8_t square = samples[i][j] * samples[i][j];
+						double square = samples[i][j] * samples[i][j];
 						results[j] += square;
 					}
 
