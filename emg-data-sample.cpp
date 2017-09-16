@@ -173,7 +173,7 @@ int main(int argc, char** argv)
 				for (int i = 0; i < samples.size(); i++) {
 					for (int j = 0; j < samples[i].size(); j++) {
 						int8_t square = samples[i][j] * samples[i][j];
-						results[i] += square;
+						results[j] += square;
 					}
 
 				}
