@@ -10,14 +10,14 @@
 #include <string>
 #include <fstream>
 #include <chrono>
-
+#include <cmath>
 #include <myo/myo.hpp>
 #include <cmath>
 #include <iomanip>
 #include <algorithm>
 #include <array>
 #include <fstream>
-#include <time.h>
+//#include <time.h>
 
 
 class DataCollector : public myo::DeviceListener {
@@ -47,16 +47,15 @@ public:
     // For this example, the functions overridden above are sufficient.
 
     // We define this function to print the current values that were updated by the on...() functions above.
-    void print(int time_now)
+    void print()
     {
         // Clear the current line
         std::cout << '\r';
 		std::ofstream emg_data_test;
 
 		emg_data_test.open("emg_data_test.csv", std::ios_base::app);
-		emg_data_test << time_now + ",";
         // Print out the EMG data.
-        for (size_t i = 0; i < emgSamples.size(); i++) {
+        for (int i = 0; i < emgSamples.size(); i++) {
             std::ostringstream oss;
             oss << static_cast<int>(emgSamples[i]);
             std::string emgString = oss.str();
@@ -121,11 +120,7 @@ int main(int argc, char** argv)
         hub.run(1000/20);
         // After processing events, we call the print() member function we defined above to print out the values we've
         // obtained from any events that have occurred.
-
-		std::chrono::milliseconds ms_now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
-
-		int time_now = ms_now.count() - ms_start.count();
-        collector.print(time_now);
+        collector.print();
 
     }
 
