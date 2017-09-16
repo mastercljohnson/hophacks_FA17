@@ -10,7 +10,7 @@
 #include <string>
 #include <fstream>
 #include <chrono>
-
+#include <gsl/gsl_const_cgs.h>
 #include <myo/myo.hpp>
 #include <cmath>
 #include <iomanip>
@@ -73,7 +73,6 @@ public:
 	std::array<int8_t, 8> print()
 	{
 
-		//int iter = iter + 1;
 		// Clear the current line
 		std::cout << '\r';
 		
@@ -83,10 +82,6 @@ public:
 			std::ostringstream oss;
 			oss << static_cast<int>(emgSamples[i]);
 			std::string emgString = oss.str();
-
-
-			
-
 
 
 			std::cout << '[' << emgString << std::string(4 - emgString.size(), ' ') << ']';
@@ -108,6 +103,8 @@ public:
 
 	}*/
 };
+
+
 
 int main(int argc, char** argv)
 {
@@ -146,7 +143,8 @@ int main(int argc, char** argv)
 		int cycles = 0;
 		//counter until next RMS
 		std::array<std::array<int8_t, 8>, 25> samples;
-
+		int minute_counter = 0;
+		std::array <std::array<double, 8>, 120> results_array;
 
 		// Finally we enter our main loop.
 		while (1) {
@@ -166,7 +164,7 @@ int main(int argc, char** argv)
 
 				emg_data_test.open("emg_data_test.csv", std::ios_base::app);
 				cycles = 0;
-				std::array<double, 8> results;
+				std::array<double, 8> results = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
 				//perform sum
 				for (int i = 0; i < samples.size(); i++) {
@@ -181,14 +179,18 @@ int main(int argc, char** argv)
 				for (int i = 0; i < results.size(); i++) {
 					results[i] = results[i] / samples.size();
 					results[i] = sqrt(results[i]);
-					std::ostringstream oss;
-					oss << static_cast<int>(results[i]);
-					std::string emgString = oss.str();
-					emg_data_test << emgString + ",";
+					
+				}
+				
+				results_array[minute_counter] = results;
+				minute_counter++;
+
+				if (minute_counter >= 120) {
+					
+					
 				}
 				emg_data_test << "\n";
 				emg_data_test.close();
-				
 
 			}
 		}
