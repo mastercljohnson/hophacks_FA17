@@ -10,7 +10,7 @@
 #include <string>
 #include <fstream>
 #include <chrono>
-#include <gsl/gsl_const_cgs.h>
+#include <gsl/gsl_fit.h>
 #include <myo/myo.hpp>
 #include <cmath>
 #include <iomanip>
@@ -184,9 +184,27 @@ int main(int argc, char** argv)
 				
 				results_array[minute_counter] = results;
 				minute_counter++;
+				std::array<double, results_array.size()> time_array;
+				time_array[0] = 0;
+				for (int i = 1; i < results_array.size(); i++) {
+					time_array[i] = time_array[0] + i * 0.5;
 
+				}
+				
 				if (minute_counter >= 120) {
-					
+					for (int i = 0; i < results_array.size(); i++) {
+						double c0;
+						double c1;
+						double c00;
+						double c01;
+						double c11;
+						double sumsq;
+						
+						gsl_fit_linear(time_array.data(), sizeof(double), results_array[i].data(), sizeof(double), results_array.size(),
+							&c0, &c1, &c00, &c01, &c11,&sumsq);
+						emg_data_test << c1;
+						emg_data_test << ",";
+					}
 					
 				}
 				emg_data_test << "\n";

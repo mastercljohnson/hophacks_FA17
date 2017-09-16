@@ -84,7 +84,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>myo64.lib</AdditionalDependencies>
+      <AdditionalDependencies>myo64.lib;gsl.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>.\msvc2017_64\lib;.\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\lib</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>

@@ -1,3 +1,1 @@
-﻿  emg-data-sample-VisualStudio2013.vcxproj -> C:\Users\Patrick\Documents\GitHub\hophacks_FA17\x64\Debug\emg-data-sample-VisualStudio2013.exe
-  emg-data-sample-VisualStudio2013.vcxproj -> C:\Users\Patrick\Documents\GitHub\hophacks_FA17\x64\Debug\emg-data-sample-VisualStudio2013.pdb (Partial PDB)
-          1 file(s) copied.
+﻿LINK : fatal error LNK1104: cannot open file 'gsl.lib'
