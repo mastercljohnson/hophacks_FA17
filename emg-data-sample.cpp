@@ -73,7 +73,7 @@ public:
 	std::array<int8_t, 8> print()
 	{
 
-		int iter = iter + 1;
+		//int iter = iter + 1;
 		// Clear the current line
 		std::cout << '\r';
 		
