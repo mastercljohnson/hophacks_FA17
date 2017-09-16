@@ -63,16 +63,17 @@ public:
 				std::string val;
 			std:getline(iss, val, ',');
 				if (!iss.good())
-				break;
+					break;
 
 				std::stringstream converter(val);
-				converter >> extractarray[row][col]
+				converter >> extractarray[row][col];
 			}
 		}
+	}
 	void print()
 	{
 
-		iter = iter + 1;
+		int iter = iter + 1;
 		// Clear the current line
 		std::cout << '\r';
 		std::ofstream emg_data_test;
