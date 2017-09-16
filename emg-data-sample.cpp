@@ -70,15 +70,13 @@ public:
 			}
 		}
 	}
-	void print()
+	std::array<int8_t, 8> print()
 	{
 
 		int iter = iter + 1;
 		// Clear the current line
 		std::cout << '\r';
-		std::ofstream emg_data_test;
-
-		emg_data_test.open("emg_data_test.csv", std::ios_base::app);
+		
 
 		// Print out the EMG data.
 		for (size_t i = 0; i < emgSamples.size(); i++) {
@@ -87,25 +85,28 @@ public:
 			std::string emgString = oss.str();
 
 
-			emg_data_test << emgString + ",";
+			
 
 
 
 			std::cout << '[' << emgString << std::string(4 - emgString.size(), ' ') << ']';
 		}
 
-		emg_data_test << "\n";
-		emg_data_test.close();
+		
 		std::cout << std::flush;
+		return emgSamples;
 	}
 
 	// The values of this array is set by onEmgData() above.
+	
 	std::array<int8_t, 8> emgSamples;
-	if (iter == 50) {
+
+	/*
+	if(iter == 50) {
 		iter = 0;
 	std:cout << "IF_STATEMENT_WORKS";
 
-	}
+	}*/
 };
 
 int main(int argc, char** argv)
@@ -143,8 +144,11 @@ int main(int argc, char** argv)
 		// Hub::addListener() takes the address of any object whose class inherits from DeviceListener, and will cause
 		// Hub::run() to send events to all registered device listeners.
 		hub.addListener(&collector);
+		int cycles = 0;
+		//counter until next RMS
+		std::array<std::array<int8_t, 8>, 25> samples;
 
-		std::chrono::milliseconds ms_start = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
+
 		// Finally we enter our main loop.
 		while (1) {
 			// In each iteration of our main loop, we run the Myo event loop for a set number of milliseconds.
@@ -154,8 +158,40 @@ int main(int argc, char** argv)
 			// obtained from any events that have occurred.
 
 
-			collector.print();
+			samples[cycles]= collector.print();
+			cycles++;
 
+			//once we reach 25 samples, calculate rms
+			if (cycles >= samples.size()) {
+				std::ofstream emg_data_test;
+
+				emg_data_test.open("emg_data_test.csv", std::ios_base::app);
+				cycles = 0;
+				std::array<int8_t, 8> results;
+
+				//perform sum
+				for (int i = 0; i < samples.size(); i++) {
+					for (int j = 0; j < samples[i].size(); j++) {
+						int8_t square = samples[i][j] * samples[i][j];
+						results[i] += square;
+					}
+
+				}
+
+				//perform mean and square root, and send results to file
+				for (int i = 0; i < results.size(); i++) {
+					results[i] = results[i] / samples.size();
+					results[i] = sqrt(results[i]);
+					std::ostringstream oss;
+					oss << static_cast<int>(results[i]);
+					std::string emgString = oss.str();
+					emg_data_test << emgString + ",";
+				}
+				emg_data_test << "\n";
+				emg_data_test.close();
+				
+
+			}
 		}
 
 		// If a standard exception occurred, we print out its message and exit.
