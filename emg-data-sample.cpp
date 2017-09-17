@@ -147,7 +147,7 @@ int main(int argc, char** argv)
 		//counter until next RMS
 		std::array<std::array<int8_t, 8>, 25> samples;
 		int minute_counter = 0;
-		std::array <std::array<double, 8>, 120> results_array;
+		std::array <std::array<double, 8>, 20> results_array;
 
 		// Finally we enter our main loop.
 		while (1) {
@@ -161,11 +161,11 @@ int main(int argc, char** argv)
 			samples[cycles]= collector.print();
 			cycles++;
 
+			double time_array = 0;
 			//once we reach 25 samples, calculate rms
 			if (cycles >= samples.size()) {
 				std::ofstream emg_data_test;
 
-				emg_data_test.open("emg_data_test.csv", std::ios_base::app);
 				cycles = 0;
 				std::array<double, 8> results = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
@@ -187,14 +187,11 @@ int main(int argc, char** argv)
 				
 				results_array[minute_counter] = results;
 				minute_counter++;
-				std::array<double, results_array.size()> time_array;
-				time_array[0] = 0;
-				for (int i = 1; i < results_array.size(); i++) {
-					time_array[i] = time_array[0] + i * 0.5;
-
-				}
 				
-				if (minute_counter >= 120) {
+				
+				if (minute_counter >= 20) {
+					emg_data_test.open("emg_data_test.csv", std::ios_base::app);
+
 					for (int i = 0; i < results_array.size(); i++) {
 						double c0;
 						double c1;
@@ -203,18 +200,21 @@ int main(int argc, char** argv)
 						double c11[results_array.size()];
 						double sumsq[results_array.size()];
 						
-						gsl_fit_linear(time_array.data(), sizeof(double), results_array[i].data(), sizeof(double), results_array.size(),
+						gsl_fit_linear(&time_array, sizeof(double), results_array[i].data(), sizeof(double), results_array.size(),
 							&c0, &c1, c00, c01, c11,sumsq);
-						std::ostringstream oss;
-						oss << static_cast<int>(c1);
-						std::string emgString = oss.str();
-						emg_data_test << c1;
+						
+						emg_data_test << c1 ;
 						emg_data_test << ",";
 						
 						most_recent = c1;
+						emg_data_test << "\n";
+						emg_data_test.close();
 
 					}
 					
+					minute_counter = 0;
+					time_array += .1;
+
 				}
 				if (previous_gradient != -1000000) {
 					if ((most_recent < 0) && (most_recent < previous_gradient)) {
@@ -229,8 +229,7 @@ int main(int argc, char** argv)
 				previous_gradient = most_recent;
 				
 
-				emg_data_test << "\n";
-				emg_data_test.close();
+				
 
 			}
 		}
