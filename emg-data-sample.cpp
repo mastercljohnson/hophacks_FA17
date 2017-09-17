@@ -149,7 +149,7 @@ int main(int argc, char** argv)
 		while (1) {
 			// In each iteration of our main loop, we run the Myo event loop for a set number of milliseconds.
 			// In this case, we wish to update our display 50 times a second, so we run for 1000/20 milliseconds.
-			hub.run(1000 / 20);
+			hub.run(50);
 			// After processing events, we call the print() member function we defined above to print out the values we've
 			// obtained from any events that have occurred.
 
@@ -189,7 +189,7 @@ int main(int argc, char** argv)
 				minute_counter++;
 				
 				//every 20 iterations, calculate slope of rms
-				if (minute_counter >= 20) {
+				if (minute_counter >= 10) {
 					//emg_data_test.open("emg_data_test.csv", std::ios_base::app);
 
 					for (int i = 0; i < results.size(); i++) {
@@ -210,10 +210,11 @@ int main(int argc, char** argv)
 						int me = 0;
 						//emg_data_test << c1 ;
 						//emg_data_test << ",";
-						if (i == 0) {
+						if (i == 0) { 
+							std::cout << c1 << '\n';
 							most_recent = c1;
 						}
-	
+
 						//emg_data_test << "\n";
 						//emg_data_test << std::flush;
 						//emg_data_test.close();
@@ -225,9 +226,10 @@ int main(int argc, char** argv)
 
 				}
 
+				std::cout << most_recent << ", " << previous_gradient << '\n';
 				if (previous_gradient != -1000000.0000000) {
-					if ((most_recent < 0) && (most_recent < previous_gradient)) {
-						std::cout << '\n' <<"fatige loop";
+					if ((most_recent < 0) && (most_recent-previous_gradient<-0)) {
+						std::cout << '\n' <<"fatige detected";
 						for(int n=0; n<5;n++){
 							myo->vibrate(myo->vibrationMedium);
 							myo->vibrate(myo->vibrationShort);

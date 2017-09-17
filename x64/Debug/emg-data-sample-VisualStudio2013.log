@@ -1,9 +1,9 @@
 ﻿  emg-data-sample.cpp
-c:\users\patrick\documents\github\hophacks_fa17\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include\myo\cxx\impl\../detail/ThrowOnError.hpp(39): warning C4297: 'myo::ThrowOnError::~ThrowOnError': function assumed not to throw an exception but does
-  c:\users\patrick\documents\github\hophacks_fa17\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include\myo\cxx\impl\../detail/ThrowOnError.hpp(39): note: destructor or deallocator has a (possibly implicit) non-throwing exception specification
-c:\users\patrick\documents\github\hophacks_fa17\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include\myo\cxx\impl\../detail/ThrowOnError.hpp(45): warning C4297: 'myo::ThrowOnError::~ThrowOnError': function assumed not to throw an exception but does
-  c:\users\patrick\documents\github\hophacks_fa17\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include\myo\cxx\impl\../detail/ThrowOnError.hpp(45): note: destructor or deallocator has a (possibly implicit) non-throwing exception specification
+c:\users\mastercljohnson\documents\github\hophacks_fa17\hophacks_fa17\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include\myo\cxx\impl\../detail/ThrowOnError.hpp(39): warning C4297: 'myo::ThrowOnError::~ThrowOnError': function assumed not to throw an exception but does
+  c:\users\mastercljohnson\documents\github\hophacks_fa17\hophacks_fa17\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include\myo\cxx\impl\../detail/ThrowOnError.hpp(39): note: destructor or deallocator has a (possibly implicit) non-throwing exception specification
+c:\users\mastercljohnson\documents\github\hophacks_fa17\hophacks_fa17\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include\myo\cxx\impl\../detail/ThrowOnError.hpp(45): warning C4297: 'myo::ThrowOnError::~ThrowOnError': function assumed not to throw an exception but does
+  c:\users\mastercljohnson\documents\github\hophacks_fa17\hophacks_fa17\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include\myo\cxx\impl\../detail/ThrowOnError.hpp(45): note: destructor or deallocator has a (possibly implicit) non-throwing exception specification
 emg-data-sample.cpp(63): warning C4102: 'std': unreferenced label
-  emg-data-sample-VisualStudio2013.vcxproj -> C:\Users\Patrick\Documents\GitHub\hophacks_FA17\x64\Debug\emg-data-sample-VisualStudio2013.exe
-  emg-data-sample-VisualStudio2013.vcxproj -> C:\Users\Patrick\Documents\GitHub\hophacks_FA17\x64\Debug\emg-data-sample-VisualStudio2013.pdb (Partial PDB)
+  emg-data-sample-VisualStudio2013.vcxproj -> C:\Users\mastercljohnson\Documents\GitHub\hophacks_FA17\hophacks_FA17\x64\Debug\emg-data-sample-VisualStudio2013.exe
+  emg-data-sample-VisualStudio2013.vcxproj -> C:\Users\mastercljohnson\Documents\GitHub\hophacks_FA17\hophacks_FA17\x64\Debug\emg-data-sample-VisualStudio2013.pdb (Partial PDB)
           1 file(s) copied.
