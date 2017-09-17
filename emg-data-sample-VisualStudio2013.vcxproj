@@ -79,13 +79,13 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.\msvc2017_64\include;.\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Patrick\Documents\GitHub\hophacks_FA17\msvc2017_64\include;.\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>myo64.lib;gsl.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>.\msvc2017_64\lib;.\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>".\msvc2017_64\lib\gsl\gsl.lib";myo64.lib;".\msvc2017_64\lib\gsl\cblas.lib"</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Patrick\Documents\GitHub\hophacks_FA17\msvc2017_64\lib;.\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\lib</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>COPY ".\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\bin\myo64.dll" "$(OutDir)"
