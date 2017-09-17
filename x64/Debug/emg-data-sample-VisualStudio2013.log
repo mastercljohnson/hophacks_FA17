@@ -1,5 +1,15 @@
+<<<<<<< HEAD
+﻿  emg-data-sample.cpp
+c:\users\mastercljohnson\documents\github\hophacks_fa17\hophacks_fa17\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include\myo\cxx\impl\../detail/ThrowOnError.hpp(39): warning C4297: 'myo::ThrowOnError::~ThrowOnError': function assumed not to throw an exception but does
+  c:\users\mastercljohnson\documents\github\hophacks_fa17\hophacks_fa17\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include\myo\cxx\impl\../detail/ThrowOnError.hpp(39): note: destructor or deallocator has a (possibly implicit) non-throwing exception specification
+c:\users\mastercljohnson\documents\github\hophacks_fa17\hophacks_fa17\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include\myo\cxx\impl\../detail/ThrowOnError.hpp(45): warning C4297: 'myo::ThrowOnError::~ThrowOnError': function assumed not to throw an exception but does
+  c:\users\mastercljohnson\documents\github\hophacks_fa17\hophacks_fa17\myo-sdk-win-0.9.0\myo-sdk-win-0.9.0\include\myo\cxx\impl\../detail/ThrowOnError.hpp(45): note: destructor or deallocator has a (possibly implicit) non-throwing exception specification
+emg-data-sample.cpp(63): warning C4102: 'std': unreferenced label
+LINK : fatal error LNK1104: cannot open file 'gsl.lib'
+=======
 ﻿LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
 gsl.lib(linear.obj) : warning LNK4099: PDB 'gsl.pdb' was not found with 'gsl.lib(linear.obj)' or at 'C:\Users\Patrick\Documents\GitHub\hophacks_FA17\x64\Debug\gsl.pdb'; linking object as if no debug info
   emg-data-sample-VisualStudio2013.vcxproj -> C:\Users\Patrick\Documents\GitHub\hophacks_FA17\x64\Debug\emg-data-sample-VisualStudio2013.exe
   emg-data-sample-VisualStudio2013.vcxproj -> C:\Users\Patrick\Documents\GitHub\hophacks_FA17\x64\Debug\emg-data-sample-VisualStudio2013.pdb (Partial PDB)
           1 file(s) copied.
+>>>>>>> 8619b402a96a7bb3eb511b2b631bf99c3348136f
