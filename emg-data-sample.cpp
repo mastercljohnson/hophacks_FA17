@@ -109,8 +109,8 @@ int main(int argc, char** argv)
 {
 	// We catch any exceptions that might occur below -- see the catch statement for more details.
 	try {
-		double most_recent = -1000000;
-		double previous_gradient = -1000000;
+		double most_recent = -1000000.0000000;
+		double previous_gradient = -1000000.0000000;
 
 
 
@@ -216,7 +216,7 @@ int main(int argc, char** argv)
 					time_array += .1;
 
 				}
-				if (previous_gradient != -1000000) {
+				if (previous_gradient != -1000000.0000000) {
 					if ((most_recent < 0) && (most_recent < previous_gradient)) {
 						while (true) {
 							myo->vibrate(myo->vibrationMedium);
