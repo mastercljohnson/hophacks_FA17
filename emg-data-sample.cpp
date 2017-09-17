@@ -26,7 +26,6 @@ public:
 		:emgSamples()
 	{
 	}
-
 	// onUnpair() is called whenever the Myo is disconnected from Myo Connect by the user.
 	void onUnpair(myo::Myo* myo, uint64_t timestamp)
 	{
@@ -110,6 +109,10 @@ int main(int argc, char** argv)
 {
 	// We catch any exceptions that might occur below -- see the catch statement for more details.
 	try {
+		double most_recent = -1000000;
+		double previous_gradient = -1000000;
+
+
 
 		// First, we create a Hub with our application identifier. Be sure not to use the com.example namespace when
 		// publishing your application. The Hub provides access to one or more Myos.
@@ -204,9 +207,25 @@ int main(int argc, char** argv)
 							&c0, &c1, &c00, &c01, &c11,&sumsq);
 						emg_data_test << c1;
 						emg_data_test << ",";
+						
+						most_recent = c1;
+
 					}
 					
 				}
+				if (previous_gradient != -1000000) {
+					if ((most_recent < 0) && (most_recent < previous_gradient)) {
+						while (true) {
+							myo->vibrate(myo->vibrationMedium);
+							myo->vibrate(myo->vibrationShort);
+						}
+					}
+
+				}
+				
+				previous_gradient = most_recent;
+				
+
 				emg_data_test << "\n";
 				emg_data_test.close();
 
