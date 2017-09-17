@@ -207,7 +207,7 @@ int main(int argc, char** argv)
 
 						gsl_fit_linear(&time_array, sizeof(double), results_for_reg[i].data(), sizeof(double), results_for_reg[i].size(),
 							&c0, &c1, c00, c01, c11,sumsq);
-						
+						int me = 0;
 						//emg_data_test << c1 ;
 						//emg_data_test << ",";
 						if (i == 0) {
