@@ -198,13 +198,16 @@ int main(int argc, char** argv)
 					for (int i = 0; i < results_array.size(); i++) {
 						double c0;
 						double c1;
-						double c00;
-						double c01;
-						double c11;
-						double sumsq;
+						double c00[results_array.size()];
+						double c01[results_array.size()];
+						double c11[results_array.size()];
+						double sumsq[results_array.size()];
 						
 						gsl_fit_linear(time_array.data(), sizeof(double), results_array[i].data(), sizeof(double), results_array.size(),
-							&c0, &c1, &c00, &c01, &c11,&sumsq);
+							&c0, &c1, c00, c01, c11,sumsq);
+						std::ostringstream oss;
+						oss << static_cast<int>(c1);
+						std::string emgString = oss.str();
 						emg_data_test << c1;
 						emg_data_test << ",";
 						
