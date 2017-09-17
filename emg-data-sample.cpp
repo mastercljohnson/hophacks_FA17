@@ -195,9 +195,9 @@ int main(int argc, char** argv)
 					for (int i = 0; i < results.size(); i++) {
 						double c0;
 						double c1;
-						double c00[results.size()];
-						double c01[results.size()];
-						double c11[results.size()];
+						double c00[results.size() * results_array.size()];
+						double c01[results.size() * results_array.size()];
+						double c11[results.size() * results_array.size()];
 						double sumsq[results.size()];
 						
 						std::array<std::array<double, results_array.size()>, results.size()> results_for_reg;
