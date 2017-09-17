@@ -195,9 +195,9 @@ int main(int argc, char** argv)
 					for (int i = 0; i < results.size(); i++) {
 						double c0;
 						double c1;
-						double c00[results.size() * results_array.size()];
-						double c01[results.size() * results_array.size()];
-						double c11[results.size() * results_array.size()];
+						double c00;
+						double c01;
+						double c11;
 						double sumsq[results.size()];
 						
 						std::array<std::array<double, results_array.size()>, results.size()> results_for_reg;
@@ -206,7 +206,7 @@ int main(int argc, char** argv)
 						}
 
 						gsl_fit_linear(&time_array, sizeof(double), results_for_reg[i].data(), sizeof(double), results_for_reg[i].size(),
-							&c0, &c1, c00, c01, c11,sumsq);
+							&c0, &c1, &c00, &c01, &c11,sumsq);
 						int me = 0;
 						//emg_data_test << c1 ;
 						//emg_data_test << ",";
