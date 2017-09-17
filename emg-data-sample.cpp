@@ -77,6 +77,7 @@ public:
 		
 
 		// Print out the EMG data.
+		/*
 		for (size_t i = 0; i < emgSamples.size(); i++) {
 			std::ostringstream oss;
 			oss << static_cast<int>(emgSamples[i]);
@@ -84,7 +85,7 @@ public:
 
 
 			std::cout << '[' << emgString << std::string(4 - emgString.size(), ' ') << ']';
-		}
+		}*/
 
 		
 		std::cout << std::flush;
@@ -95,12 +96,6 @@ public:
 	
 	std::array<int8_t, 8> emgSamples;
 
-	/*
-	if(iter == 50) {
-		iter = 0;
-	std:cout << "IF_STATEMENT_WORKS";
-
-	}*/
 };
 
 
@@ -158,14 +153,15 @@ int main(int argc, char** argv)
 			// After processing events, we call the print() member function we defined above to print out the values we've
 			// obtained from any events that have occurred.
 
-
+			//obtain data
 			samples[cycles]= collector.print();
 			cycles++;
 
 			//once we reach 25 samples, calculate rms
 			if (cycles >= samples.size()) {
-				std::ofstream emg_data_test;
 
+				//various variable initialization
+				std::ofstream emg_data_test;
 				cycles = 0;
 				std::array<double, 8> results = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
@@ -178,13 +174,13 @@ int main(int argc, char** argv)
 
 				}
 
-				//perform mean and square root, and send results to file
+				//perform mean and square root
 				for (int i = 0; i < results.size(); i++) {
 					results[i] = results[i] / samples.size();
 					results[i] = sqrt(results[i]);
 					
 				}
-				
+				//populate results array
 				for (int i = 0; i < results.size(); i++) {
 					results_array[minute_counter][i] = results[i];
 
@@ -192,9 +188,9 @@ int main(int argc, char** argv)
 				//results_array[minute_counter] = results;
 				minute_counter++;
 				
-				
+				//every 20 iterations, calculate slope of rms
 				if (minute_counter >= 20) {
-					emg_data_test.open("emg_data_test.csv", std::ios_base::app);
+					//emg_data_test.open("emg_data_test.csv", std::ios_base::app);
 
 					for (int i = 0; i < results_array.size(); i++) {
 						double c0;
@@ -207,15 +203,15 @@ int main(int argc, char** argv)
 						gsl_fit_linear(&time_array, sizeof(double), results_array[i].data(), sizeof(double), results_array.size(),
 							&c0, &c1, c00, c01, c11,sumsq);
 						
-						emg_data_test << c1 ;
-						emg_data_test << ",";
+						//emg_data_test << c1 ;
+						//emg_data_test << ",";
 						if (i == 0) {
 							most_recent = c1;
 						}
 	
-						emg_data_test << "\n";
-						emg_data_test << std::flush;
-						emg_data_test.close();
+						//emg_data_test << "\n";
+						//emg_data_test << std::flush;
+						//emg_data_test.close();
 
 					}
 					
@@ -237,10 +233,6 @@ int main(int argc, char** argv)
 				}
 				
 				previous_gradient = most_recent;
-				
-
-				
-
 			}
 		}
 
