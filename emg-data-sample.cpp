@@ -223,13 +223,13 @@ int main(int argc, char** argv)
 					time_array += .1;
 
 				}
-				std::cout << most_recent;
-				std::cout << previous_gradient;
+
 				if (previous_gradient != -1000000.0000000) {
 					if ((most_recent < 0) && (most_recent < previous_gradient)) {
-						std::cout << "fatige loop";
-						while (true) {
+						std::cout << '\n' <<"fatige loop";
+						for(int n=0; n<5;n++){
 							myo->vibrate(myo->vibrationMedium);
+							myo->vibrate(myo->vibrationShort);
 							myo->vibrate(myo->vibrationShort);
 						}
 					}
