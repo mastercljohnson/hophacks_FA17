@@ -148,6 +148,7 @@ int main(int argc, char** argv)
 		std::array<std::array<int8_t, 8>, 25> samples;
 		int minute_counter = 0;
 		std::array <std::array<double, 8>, 20> results_array;
+		double time_array = 0.0;
 
 		// Finally we enter our main loop.
 		while (1) {
@@ -161,7 +162,6 @@ int main(int argc, char** argv)
 			samples[cycles]= collector.print();
 			cycles++;
 
-			double time_array = 0;
 			//once we reach 25 samples, calculate rms
 			if (cycles >= samples.size()) {
 				std::ofstream emg_data_test;
@@ -185,7 +185,11 @@ int main(int argc, char** argv)
 					
 				}
 				
-				results_array[minute_counter] = results;
+				for (int i = 0; i < results.size(); i++) {
+					results_array[minute_counter][i] = results[i];
+
+				}
+				//results_array[minute_counter] = results;
 				minute_counter++;
 				
 				
@@ -205,9 +209,12 @@ int main(int argc, char** argv)
 						
 						emg_data_test << c1 ;
 						emg_data_test << ",";
-						
-						most_recent = c1;
+						if (i == 0) {
+							most_recent = c1;
+						}
+	
 						emg_data_test << "\n";
+						emg_data_test << std::flush;
 						emg_data_test.close();
 
 					}
@@ -216,8 +223,11 @@ int main(int argc, char** argv)
 					time_array += .1;
 
 				}
+				std::cout << most_recent;
+				std::cout << previous_gradient;
 				if (previous_gradient != -1000000.0000000) {
 					if ((most_recent < 0) && (most_recent < previous_gradient)) {
+						std::cout << "fatige loop";
 						while (true) {
 							myo->vibrate(myo->vibrationMedium);
 							myo->vibrate(myo->vibrationShort);
