@@ -143,7 +143,8 @@ int main(int argc, char** argv)
 		std::array<std::array<int8_t, 8>, 25> samples;
 		int minute_counter = 0;
 		std::array <std::array<double, 8>, 20> results_array;
-		double time_array = 0.0;
+		double time_array[results_array.size()];
+		double iter = 0.0;
 
 		// Finally we enter our main loop.
 		while (1) {
@@ -152,13 +153,12 @@ int main(int argc, char** argv)
 			hub.run(50);
 			// After processing events, we call the print() member function we defined above to print out the values we've
 			// obtained from any events that have occurred.
-
+			iter += 0.05;
 			//obtain data
 			samples[cycles]= collector.print();
-			cycles++;
 
 			//once we reach 25 samples, calculate rms
-			if (cycles >= samples.size()) {
+			if (cycles >= samples.size() -1) {
 
 				//various variable initialization
 				std::ofstream emg_data_test;
@@ -183,7 +183,7 @@ int main(int argc, char** argv)
 				//populate results array
 				for (int i = 0; i < results.size(); i++) {
 					results_array[minute_counter][i] = results[i];
-
+					time_array[cycles] = iter;
 				}
 				//results_array[minute_counter] = results;
 				minute_counter++;
@@ -198,16 +198,17 @@ int main(int argc, char** argv)
 						double c00;
 						double c01;
 						double c11;
-						double sumsq[results.size()];
+						double sumsq;
 						
 						std::array<std::array<double, results_array.size()>, results.size()> results_for_reg;
+						//double results_for_reg[results.size()][results_array.size()];
 						for (int j = 0; j < results.size(); j++) {
 							results_for_reg[i][j] = results_array[j][i];
 						}
 
-						gsl_fit_linear(&time_array, sizeof(double), results_for_reg[i].data(), sizeof(double), results_for_reg[i].size(),
-							&c0, &c1, &c00, &c01, &c11,sumsq);
-						int me = 0;
+						gsl_fit_linear(time_array, sizeof(double), results_for_reg[i].data(), sizeof(results_for_reg[i][0]), 20,
+							&c0, &c1, &c00, &c01, &c11,&sumsq);
+						
 						//emg_data_test << c1 ;
 						//emg_data_test << ",";
 						if (i == 0) { 
@@ -222,7 +223,7 @@ int main(int argc, char** argv)
 					}
 					
 					minute_counter = 0;
-					time_array += .1;
+
 
 				}
 
@@ -241,6 +242,8 @@ int main(int argc, char** argv)
 				
 				previous_gradient = most_recent;
 			}
+			cycles++;
+
 		}
 
 		// If a standard exception occurred, we print out its message and exit.
