@@ -192,7 +192,7 @@ int main(int argc, char** argv)
 				if (minute_counter >= 20) {
 					//emg_data_test.open("emg_data_test.csv", std::ios_base::app);
 
-					for (int i = 0; i < results_array.size(); i++) {
+					for (int i = 0; i < results.size(); i++) {
 						double c0;
 						double c1;
 						double c00[results_array.size()];
@@ -200,7 +200,12 @@ int main(int argc, char** argv)
 						double c11[results_array.size()];
 						double sumsq[results_array.size()];
 						
-						gsl_fit_linear(&time_array, sizeof(double), results_array[i].data(), sizeof(double), results_array.size(),
+						std::array<std::array<double, results_array.size()>, results.size()> results_for_reg;
+						for (int j = 0; j < results.size(); j++) {
+							results_for_reg[i][j] = results_array[j][i];
+						}
+
+						gsl_fit_linear(&time_array, sizeof(double), results_for_reg[i].data(), sizeof(double), results_for_reg[i].size(),
 							&c0, &c1, c00, c01, c11,sumsq);
 						
 						//emg_data_test << c1 ;
